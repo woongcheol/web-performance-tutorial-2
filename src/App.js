@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
 import InfoTable from "./components/InfoTable";
@@ -11,9 +11,14 @@ const LazyImageModal = lazy(() => import("./components/ImageModal"));
 function App() {
   const [showModal, setShowModal] = useState(false);
 
-  const handleMouseEnter = () => {
+  // button hover 시, 컴포넌트 사전 로딩 적용
+  //   const handleMouseEnter = () => {
+  //     const component = import("./components/ImageModal");
+  //   };
+
+  useEffect(() => {
     const component = import("./components/ImageModal");
-  };
+  });
 
   return (
     <div className="App">
@@ -23,7 +28,7 @@ function App() {
         onClick={() => {
           setShowModal(true);
         }}
-        onMouseEnter={handleMouseEnter}
+        // onMouseEnter={handleMouseEnter}
       >
         올림픽 사진 보기
       </ButtonModal>
